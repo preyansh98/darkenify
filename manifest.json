@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "Darkenify",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mycourses2.mcgill.ca/*", 
+        "http://mycourses2.mcgill.ca/*"
+      ],
+      "js": ["js/index.js"]
+    }
+  ]
+}
