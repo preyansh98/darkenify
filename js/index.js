@@ -2,6 +2,7 @@
 
 let _color = "black";
 let _invert = "white";
+const PAGE_LOAD_TIMEOUT = 250; 
 
 const darkenElementsByClassName = (classesToDarken) => {
     for(const className of classesToDarken) {
@@ -40,13 +41,15 @@ const darken = () => {
     //Color all Tile Backgrounds
     let tiles = document.getElementsByClassName('d2l-tile');
 
-    for (let i = 0; i<tiles.length; i++){
+    for (let i = 0; i<tiles.length; ++i)
         tiles[i].style.backgroundColor = _color;
-    }
+
+    //Color Body Tag
+    document.getElementsByTagName('body')[0].style.backgroundColor = 'black'; 
 
 /* BEGIN INVERT */
 
-    //Color all Nav Links White. 
+    //Invert all Nav Links. 
     if(document.getElementsByClassName('d2l-navigation-s-group-text')[0])
         document.getElementsByClassName('d2l-navigation-s-group-text')[0].style.color = "white"
     
@@ -54,12 +57,14 @@ const darken = () => {
     for(let i = 0; i<navLinks.length; ++i)
         navLinks[i].style.color = _invert;
 
-    //Color all p elements White. 
-    let texts = document.getElementsByTagName('p');
-    for(let i = 0; i<texts.length; ++i)
-        texts[i].style.color = _invert;
+    //Invert all <p> tags except in 'discussions'
+    if(window.location.href.indexOf('discussions') != -1){
+        let texts = document.getElementsByTagName('p');
+        for(let i = 0; i<texts.length; ++i)
+            texts[i].style.color = _invert;
+    }
     
-    //Color all headings white.
+    //Invert all headings.
     let headings = document.getElementsByClassName('d2l-heading vui-heading-4')
     for(let i = 0; i<headings.length; ++i)
         headings[i].style.color = _invert; 
@@ -68,4 +73,4 @@ const darken = () => {
     //Course Text
 } 
 
-setTimeout(darken,300); 
+setTimeout(darken, PAGE_LOAD_TIMEOUT); 
