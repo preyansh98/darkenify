@@ -1,7 +1,7 @@
 # Darkenify!
 A chrome extension for McGill Students to add Dark Mode to MyCourses :)
 
-![](https://github.com/preyansh98/darkenify/blob/docs_update/.github/screens_1.gif)
+![](https://github.com/preyansh98/darkenify/blob/master/.github/screens_1.gif)
 
 ## How to use
 
