@@ -5,7 +5,15 @@ A chrome extension for McGill Students to add Dark Mode to MyCourses :)
 
 ## How to use
 
+ - Download ZIP and extract on your computer
+ - Navigate to <i>chrome://extensions</i>
+ - Select '<b>Load unpacked</b>' 
+ - Select the extracted folder
+ - The extension should now be enabled
+
 ## Feature Requests
+
+Create an issue, and we will talk! 
 
 ## License 
 Darkenify is a browser extension that introduces a dark mode color scheme to the McGill MyCourses website.  Copyright © Preyansh Kaushik. McGill is a University in Montreal, Canada and has no affiliation with this software.
