@@ -4,6 +4,27 @@ let _color = "black";
 let _invert = "white";
 const PAGE_LOAD_TIMEOUT = 250; 
 
+//TODO: Stop Hardcoding :(
+const invertCourseText = () => {
+    if(window.location.href.indexOf('home') != -1){
+        try{
+            if(document.getElementsByTagName('d2l-my-courses').length > 0){
+                let tiles = document.getElementsByTagName('d2l-my-courses')[0]
+                            .shadowRoot["firstElementChild"]
+                            .shadowRoot["firstElementChild"]
+                            .shadowRoot["children"][2]
+                            .children[1]
+                            .shadowRoot["children"][1]; 
+                
+                for(let i = 0; i<tiles["childElementCount"]; ++i)
+                    tiles["children"][i].style.color = _invert; 
+            }
+        } catch (err) {
+            console.log("Failed to invert course text");
+        }
+    }
+}
+
 const darkenElementsByClassName = (classesToDarken) => {
     for(const className of classesToDarken) {
         let collection = document.getElementsByClassName(className);
