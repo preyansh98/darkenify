@@ -3,6 +3,7 @@
 let _color = "black";
 let _invert = "white";
 const PAGE_LOAD_TIMEOUT = 250; 
+const SPINNER_TIMEOUT = 2500;
 
 //TODO: Stop Hardcoding :(
 const invertCourseText = () => {
@@ -21,6 +22,7 @@ const invertCourseText = () => {
             }
         } catch (err) {
             console.log("Failed to invert course text");
+            console.error(err); 
         }
     }
 }
@@ -92,6 +94,7 @@ const darken = () => {
 
 
     //Course Text
+    setTimeout(invertCourseText, SPINNER_TIMEOUT); 
 } 
 
 setTimeout(darken, PAGE_LOAD_TIMEOUT); 
