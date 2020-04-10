@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Darkenify",
   "author": "Preyansh Kaushik",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Add Dark Mode to McGill MyCourses!",
   "homepage_url": "https://github.com/preyansh98/darkenify",  
   "content_scripts": [
