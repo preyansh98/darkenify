@@ -81,7 +81,7 @@ const darken = () => {
         navLinks[i].style.color = _invert;
 
     //Invert all <p> tags except in 'discussions'
-    if(window.location.href.indexOf('discussions') != -1){
+    if(window.location.href.indexOf('discussions') == -1){
         let texts = document.getElementsByTagName('p');
         for(let i = 0; i<texts.length; ++i)
             texts[i].style.color = _invert;
