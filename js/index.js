@@ -1,6 +1,7 @@
 'use strict';
 
 let _color = "black";
+let _cardColor = "#121212";
 let _invert = "white";
 const PAGE_LOAD_TIMEOUT = 250; 
 const SPINNER_TIMEOUT = 2500;
@@ -32,7 +33,7 @@ const darkenElementsByClassName = (classesToDarken) => {
         let collection = document.getElementsByClassName(className);
         
         if(collection.length > 0)
-            collection[0].style.backgroundColor = _color; 
+            collection[0].style.backgroundColor = _cardColor; 
     }
 }
 
@@ -40,24 +41,23 @@ const darken = () => {
     let classesToDarken = []; 
 
     //Body
-    classesToDarken.push('d2l-body');
+    if(document.getElementsByClassName('d2l-body').length > 0)
+        document.getElementsByClassName('d2l-body')[0].style.backgroundColor = _color;
 
+    document.getElementsByTagName('body')[0].style.backgroundColor = _color; 
+        
+    let searchBarBg = document.getElementsByClassName('d2l-twopanelselector-side');
+    if(searchBarBg.length > 0)
+        searchBarBg[0].style.background = _color;
+    
     //Front Page -> Navigation: 
     classesToDarken.push('d2l-branding-navigation-dark-foreground-color');
     classesToDarken.push('d2l-branding-navigation-background-color');
-    classesToDarken.push('d2l-page-main');
-
-    //Front Page -> Tiles:
-    classesToDarken.push('d2l-tiles-container');
 
     //Content Page -> sidebar:
     classesToDarken.push('d2l-twopanelselector-side-padding');
     classesToDarken.push('d2l-twopanelselector-padding');
 
-    let searchBarBg = document.getElementsByClassName('d2l-twopanelselector-side');
-    if(searchBarBg.length > 0)
-        searchBarBg[0].style.background = 'black';
-    
     //Darken listed classes. 
     darkenElementsByClassName(classesToDarken);
 
@@ -65,10 +65,7 @@ const darken = () => {
     let tiles = document.getElementsByClassName('d2l-tile');
 
     for (let i = 0; i<tiles.length; ++i)
-        tiles[i].style.backgroundColor = _color;
-
-    //Color Body Tag
-    document.getElementsByTagName('body')[0].style.backgroundColor = 'black'; 
+        tiles[i].style.backgroundColor = _cardColor;
 
 /* BEGIN INVERT */
 
