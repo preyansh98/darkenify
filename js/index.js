@@ -8,7 +8,7 @@ const SPINNER_TIMEOUT = 2500;
 
 //TODO: Stop Hardcoding :(
 const invertCourseText = () => {
-    if(window.location.href.indexOf('home') != -1){
+    if(document.URL.includes('home')){
         try{
             if(document.getElementsByTagName('d2l-my-courses').length > 0){
                 let tiles = document.getElementsByTagName('d2l-my-courses')[0]
@@ -78,10 +78,18 @@ const darken = () => {
         navLinks[i].style.color = _invert;
 
     //Invert all <p> tags except in 'discussions'
-    if(window.location.href.indexOf('discussions') == -1){
+    if(!document.URL.includes('discussions')){
         let texts = document.getElementsByTagName('p');
         for(let i = 0; i<texts.length; ++i)
             texts[i].style.color = _invert;
+    }
+
+    if(document.URL.includes('content')){
+        let textBlocks = document.getElementsByClassName('d2l-textblock');
+        for(let i = 0; i<textBlocks.length; ++i){
+            if(textBlocks[i].title) continue;
+            textBlocks[i].style.color = _invert; 
+        }
     }
     
     //Invert all headings.
