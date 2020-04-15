@@ -3,6 +3,7 @@
 let _color = "black";
 let _cardColor = "#121212";
 let _invert = "white";
+const SHADOW_TIMEOUT = 100;
 const PAGE_LOAD_TIMEOUT = 250; 
 const SPINNER_TIMEOUT = 2500;
 
@@ -26,6 +27,22 @@ const invertCourseText = () => {
             console.error(err); 
         }
     }
+}
+
+const invertNavIcons = () => {
+    for(let i = 0; i<=3; ++i) {
+         document.getElementsByClassName('d2l-dropdown-opener')[i]
+                    .shadowRoot["children"][1]
+                    .children[0]
+                    .children[0]
+                    .shadowRoot
+                    .children[0]
+                    .style.color = _invert;
+    }
+
+    let profileNameWrapper = document.getElementsByClassName('d2l-navigation-s-personal-menu-wrapper');
+    if(profileNameWrapper.length > 0)
+        profileNameWrapper[0].style.color = _invert;
 }
 
 const darkenElementsByClassName = (classesToDarken) => {
@@ -71,7 +88,7 @@ const darken = () => {
 
     //Invert all Nav Links. 
     if(document.getElementsByClassName('d2l-navigation-s-group-text')[0])
-        document.getElementsByClassName('d2l-navigation-s-group-text')[0].style.color = "white"
+        document.getElementsByClassName('d2l-navigation-s-group-text')[0].style.color = _invert;
     
     let navLinks =  document.getElementsByClassName('d2l-navigation-s-link');
     for(let i = 0; i<navLinks.length; ++i)
@@ -84,6 +101,7 @@ const darken = () => {
             texts[i].style.color = _invert;
     }
 
+    //Invert all textblocks on "content" page
     if(document.URL.includes('content')){
         let textBlocks = document.getElementsByClassName('d2l-textblock');
         for(let i = 0; i<textBlocks.length; ++i){
@@ -97,6 +115,8 @@ const darken = () => {
     for(let i = 0; i<headings.length; ++i)
         headings[i].style.color = _invert; 
 
+    //Nav Icons
+    setTimeout(invertNavIcons, SHADOW_TIMEOUT);
 
     //Course Text
     setTimeout(invertCourseText, SPINNER_TIMEOUT); 
