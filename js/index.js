@@ -1,8 +1,14 @@
 'use strict';
 
+/*Colors */ 
 let _color = "black";
 let _cardColor = "#121212";
 let _invert = "white";
+
+/* Intervals */ 
+const INVERT_TITLES_INTERV = 100;  
+
+/* Timeouts */ 
 const SHADOW_TIMEOUT = 100;
 const PAGE_LOAD_TIMEOUT = 250; 
 const SPINNER_TIMEOUT = 2500;
@@ -29,8 +35,32 @@ const invertCourseText = () => {
     }
 }
 
+const invertPageTitles = () => {
+    let _invertPageTitles = () => {
+        let invertElements = (className) => {
+            if(document.getElementsByClassName(className).length > 0)
+                document.getElementsByClassName(className)[0].style.color = _invert; 
+        }
+
+        if(document.URL.includes('content')){
+            invertElements('d2l-page-title');
+            invertElements('d2l-heading-1');
+        }
+    }
+
+    _invertPageTitles(); 
+
+    const listener = new MutationObserver((mutations) => {
+        _invertPageTitles(); 
+    });
+
+    listener.observe(document.querySelector('title'),
+        {attributes: true, childList: true, subtree: true});
+}   
+
 const invertNavIcons = () => {
-    for(let i = 0; i<=3; ++i) {
+    try {
+        for(let i = 0; i<=3; ++i) {
          document.getElementsByClassName('d2l-dropdown-opener')[i]
                     .shadowRoot["children"][1]
                     .children[0]
@@ -38,6 +68,10 @@ const invertNavIcons = () => {
                     .shadowRoot
                     .children[0]
                     .style.color = _invert;
+        }
+    } catch(err) {
+        console.log("Failed to invert nav icons");
+        console.error(err);
     }
 
     let profileNameWrapper = document.getElementsByClassName('d2l-navigation-s-personal-menu-wrapper');
@@ -114,6 +148,12 @@ const darken = () => {
     let headings = document.getElementsByClassName('d2l-heading vui-heading-4')
     for(let i = 0; i<headings.length; ++i)
         headings[i].style.color = _invert; 
+
+    if(document.getElementsByClassName('vui-heading-1').length > 0)
+        document.getElementsByClassName('vui-heading-1')[0].style.color = _invert; 
+
+    if(document.URL.includes('content'))
+        invertPageTitles(); 
 
     //Nav Icons
     setTimeout(invertNavIcons, SHADOW_TIMEOUT);
