@@ -128,8 +128,8 @@ const darken = () => {
     for(let i = 0; i<navLinks.length; ++i)
         navLinks[i].style.color = _invert;
 
-    //Invert all <p> tags except in 'discussions'
-    if(!document.URL.includes('discussions')){
+    //Invert all <p> tags except in 'discussions' and 'news'
+    if(!document.URL.includes('discussions') && !document.URL.includes('news')){
         let texts = document.getElementsByTagName('p');
         for(let i = 0; i<texts.length; ++i)
             texts[i].style.color = _invert;
