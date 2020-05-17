@@ -120,3 +120,8 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+textarea {
+  overflow: auto;
+  resize: none;
+}

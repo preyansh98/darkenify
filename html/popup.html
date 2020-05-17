@@ -1,38 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Darkenify - Dark Mode for MyCourses</title>
-        <!-- Popup CSS -->
-        <link rel="stylesheet" href="../css/popup.css" type="text/css"></link>
-        <!-- Popup JS file-->
-        <script src="../js/popup.js" type="text/javascript"></script> 
-    </head>
-    
-    <body id="popup-body">
-        <div class = "popup-content">
-        <center><p class="welcome-text">Welcome to Darkenify!</p>
+  <head>
+    <title>Darkenify - Dark Mode for MyCourses</title>
+    <!-- Popup CSS -->
+    <link rel="stylesheet" href="../css/popup.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Popup JS file-->
+    <script src="../js/popup.js" type="text/javascript"></script>
+  </head>
+
+  <body id="popup-body">
+    <div class="popup-content">
+      <center>
+        <p class="welcome-text">Welcome to Darkenify!</p>
         <!-- Rate your experience -->
         <button class="collapsible">Rate your experience</button>
         <div class="content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          Hello there!
         </div>
-        
+
         <!-- Submit an issue -->
         <button class="collapsible">Submit an issue</button>
         <div class="content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <textarea
+            placeholder="Submit an issue!"
+            rows="6"
+            name="comment[text]"
+            id="comment_text"
+            cols="40"
+            class="ui-autocomplete-input"
+          ></textarea>
+          <button>Submit</button>
         </div>
 
         <!-- Toggle On/Off -->
-        <div class = "toggle-container">
-        <p class = "toggle-text"> Toggle on/off: </p>
-        <label class="switch">
-            <input type="checkbox" id="toggle-switch">
+        <div class="toggle-container">
+          <p class="toggle-text">Toggle on/off:</p>
+          <label class="switch">
+            <input type="checkbox" id="toggle-switch" />
             <span class="slider round"></span>
-        </label>
-    </div>
-
-        </center>
+          </label>
         </div>
-    </body>
+      </center>
+    </div>
+  </body>
 </html>
