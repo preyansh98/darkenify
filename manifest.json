@@ -19,6 +19,10 @@
     "default_popup": "html/popup.html",
     "default_title": "Darkenify - Add Dark Mode to MyCourses"
   },
+  "background": {
+    "scripts" : ["js/background.js"],
+    "persistent" : false
+  },
   "content_scripts": [
     {
       "matches": [
@@ -27,5 +31,6 @@
       ],
       "js": ["js/index.js"]
     }
-  ]
+  ], 
+  "permissions" : ["storage",  "*://*.mycourses2.mcgill.ca/*"]
 }

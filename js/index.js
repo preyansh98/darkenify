@@ -164,4 +164,13 @@ const darken = () => {
     setTimeout(invertCourseText, SPINNER_TIMEOUT); 
 } 
 
-setTimeout(darken, PAGE_LOAD_TIMEOUT); 
+const initExtension = () => {
+    chrome.storage.local.get('enabled', function(res){
+        const isEnabled = res['enabled']; 
+        if(isEnabled){
+            setTimeout(darken, PAGE_LOAD_TIMEOUT); 
+        }
+    });
+}
+
+initExtension(); 

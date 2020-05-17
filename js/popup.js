@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    runCollapsibleUISource()   
+    runCollapsibleUISource(); 
+    document.getElementById('toggle-switch').addEventListener('click', updateToggle);
+    initToggle(); 
 });
 
 function runCollapsibleUISource(){
@@ -17,4 +19,26 @@ function runCollapsibleUISource(){
         } 
       });
     }
+}
+
+//Toggle Switch
+function updateToggle() {
+	const isEnabled = document.getElementById('toggle-switch').checked;
+	setEnabled(isEnabled);
+}
+
+function setEnabled(isEnabled) {
+	chrome.storage.local.set({'enabled': isEnabled});
+}
+
+function initToggle() {
+	chrome.storage.local.get('enabled', function(res) {
+    let isEnabled = res.enabled; 
+
+    if(isEnabled !== undefined) {
+      document.getElementById('toggle-switch').checked = isEnabled; 
+    } else {
+      updateToggle();
+    }
+  }); 
 }
