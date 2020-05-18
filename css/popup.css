@@ -54,11 +54,6 @@ body {
   display: inline-block;
 }
 
-.checked {
-  color: orange;
-}
-
-
 /* The switch - the box around the slider */
 .switch {
   position: relative;
@@ -124,4 +119,41 @@ input:checked + .slider:before {
 textarea {
   overflow: auto;
   resize: none;
+}
+
+/**** Rating ****/
+
+.checked {
+  color: red;
+}
+
+.unchecked {
+  color: black;
+}
+
+.select-rating-text {
+  margin-top: 2%;
+  padding: 0;
+}
+
+.rating-container {
+  margin-bottom: 2%;
+}
+
+#rating-submit-text{
+  color: green;
+}
+
+#rating-error-text{
+  color: red;
+}
+
+#submit-rating-button {
+  background-color: #4CAF50;
+  border: none;
+  margin-left: 1%;
+  color: white;
+  text-align: center;
+  display: inline-flex;
+  text-decoration: none;
 }

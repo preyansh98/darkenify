@@ -9,7 +9,7 @@ let _invert = "white";
 const INVERT_TITLES_INTERV = 100;  
 
 /* Timeouts */ 
-const SHADOW_TIMEOUT = 100;
+const SHADOW_TIMEOUT = 120;
 const PAGE_LOAD_TIMEOUT = 250; 
 const SPINNER_TIMEOUT = 2500;
 
