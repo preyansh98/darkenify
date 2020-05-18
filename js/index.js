@@ -9,7 +9,7 @@ let _invert = "white";
 const INVERT_TITLES_INTERV = 100;  
 
 /* Timeouts */ 
-const SHADOW_TIMEOUT = 100;
+const SHADOW_TIMEOUT = 120;
 const PAGE_LOAD_TIMEOUT = 250; 
 const SPINNER_TIMEOUT = 2500;
 
@@ -164,4 +164,13 @@ const darken = () => {
     setTimeout(invertCourseText, SPINNER_TIMEOUT); 
 } 
 
-setTimeout(darken, PAGE_LOAD_TIMEOUT); 
+const initExtension = () => {
+    chrome.storage.local.get('enabled', function(res){
+        const isEnabled = res['enabled']; 
+        if(isEnabled){
+            setTimeout(darken, PAGE_LOAD_TIMEOUT); 
+        }
+    });
+}
+
+initExtension(); 
