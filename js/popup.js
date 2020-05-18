@@ -1,3 +1,5 @@
+const BACKEND_BASE_URI = "http://darkenify-pop.herokuapp.com";
+
 document.addEventListener('DOMContentLoaded', function () {
     runCollapsibleUISource(); 
     addEventHandlersForRatings(); 
@@ -47,29 +49,46 @@ function addEventHandlersForRatings() {
   }); 
 
   //Submit Button Handler. 
-  let submitButton = document.getElementById('submit-rating-button'); 
-  submitButton.addEventListener("click", function() {
+  let submitRatingButton = document.getElementById('submit-rating-button'); 
+  submitRatingButton.addEventListener("click", function() {
     const onSubmitTextNode = document.getElementById('rating-onsubmit-text'); 
     const star_ids = ["one", "two", "three", "four", "five"];
 
     var isAnyChecked = false; 
+    var ratingVal = 0; 
     for(var i = 0; i<star_ids.length; ++i){
       const star = document.getElementById(star_ids[i]); 
       if(star.classList.contains("checked")) {
-        isAnyChecked = true; 
-        break;
+        if(!isAnyChecked)
+          isAnyChecked = true; 
+        ratingVal++;       
       }
     }
 
     if(isAnyChecked) {
       onSubmitTextNode.innerText = 'Thank you for rating!';
       onSubmitTextNode.style.color = 'green';
+      var obj = {"rating" : ratingVal}
+      makePostRequest(BACKEND_BASE_URI+"/rating/create", obj); 
     } else {
       onSubmitTextNode.innerText = 'Please select a rating first';
       onSubmitTextNode.style.color = 'red';
     }
     onSubmitTextNode.style.visibility = 'inherit'; 
   })
+}
+
+function addEventHandlersForIssues(){
+//Submit Issue Handler
+  let submitIssueHandler = document.getElementById('submit-issue-button');
+  submitIssueHandler.addEventListener("click", function() {
+    const issueText = document.getElementById("comment_text"); 
+    if(issueText && issueText.innerText) {
+      const issue = issueText.innerText; 
+      var obj = {"issue" : issue}; 
+      makePostRequest(BACKEND_BASE_URI + "/issue/create", obj); 
+    }
+  });
 }
 
 //Toggle Switch
@@ -92,4 +111,50 @@ function initToggle() {
       updateToggle();
     }
   }); 
+}
+
+//Post Request for popup api
+
+function makePostRequest(endpoint, obj) { 
+  console.log("hitting enpdoint:: " + endpoint); 
+  chrome.storage.sync.get('userid', function(items) {
+    var userid = items.userid;
+    if (userid) {
+        useToken(userid);
+    } else {
+        userid = getRandomToken();
+        chrome.storage.sync.set({userid: userid}, function() {
+            useToken(userid);
+        });
+    }
+    function useToken(userid) {
+        obj.id = userid; 
+        const params = new URLSearchParams(obj).toString(); 
+
+        var req = new XMLHttpRequest(); 
+        req.open("POST", endpoint, true);
+        req.setRequestHeader("Content-type", "application/json"); 
+        req.setRequestHeader('Access-Control-Allow-Origin', '*');
+        req.send(params); 
+        
+        req.onreadystatechange = function() {
+          if(this.readyState === XMLHttpRequest.DONE && this.status == 200){
+            console.log(this.statusText); 
+          }
+        }
+    }
+  });
+}
+
+//User identification
+function getRandomToken() {
+  // E.g. 8 * 32 = 256 bits token
+  var randomPool = new Uint8Array(32);
+  crypto.getRandomValues(randomPool);
+  var hex = '';
+  for (var i = 0; i < randomPool.length; ++i) {
+      hex += randomPool[i].toString(16);
+  }
+  // E.g. db18458e2782b2b77e36769c569e263a53885a9944dd0a861e5064eac16f1a
+  return hex;
 }
