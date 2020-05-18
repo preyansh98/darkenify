@@ -3,6 +3,7 @@ const BACKEND_BASE_URI = "http://darkenify-pop.herokuapp.com";
 document.addEventListener('DOMContentLoaded', function () {
     runCollapsibleUISource(); 
     addEventHandlersForRatings(); 
+    addEventHandlersForIssues(); 
     document.getElementById('toggle-switch').addEventListener('click', updateToggle);
     initToggle(); 
 });
@@ -116,7 +117,6 @@ function initToggle() {
 //Post Request for popup api
 
 function makePostRequest(endpoint, obj) { 
-  console.log("hitting enpdoint:: " + endpoint); 
   chrome.storage.sync.get('userid', function(items) {
     var userid = items.userid;
     if (userid) {
