@@ -58,7 +58,7 @@ const invertPageTitles = () => {
         {attributes: true, childList: true, subtree: true});
 }   
 
-const invertNavIcons = () => {
+const invertNavItems = () => {
     try {
         for(let i = 0; i<=3; ++i) {
          document.getElementsByClassName('d2l-dropdown-opener')[i]
@@ -69,8 +69,18 @@ const invertNavIcons = () => {
                     .children[0]
                     .style.color = _invert;
         }
+
+        let titles = document.getElementsByClassName('d2l-branding-navigation-background-color')[0]
+                        .children[0]
+                        .children[0]
+                        .children;
+
+        for (let i = 0; i<titles.length; ++i) {
+            titles[i].children[0].children[0].children[0].children[0].style.color = _invert;
+        }
+
     } catch(err) {
-        console.log("Failed to invert nav icons");
+        console.log("Failed to invert nav items");
         console.error(err);
     }
 
@@ -158,7 +168,7 @@ const darken = () => {
         invertPageTitles(); 
 
     //Nav Icons
-    setTimeout(invertNavIcons, SHADOW_TIMEOUT);
+    setTimeout(invertNavItems, SHADOW_TIMEOUT);
 
     //Course Text
     setTimeout(invertCourseText, SPINNER_TIMEOUT); 
