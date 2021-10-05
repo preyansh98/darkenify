@@ -14,23 +14,23 @@ const PAGE_LOAD_TIMEOUT = 250;
 const SPINNER_TIMEOUT = 2500;
 
 //TODO: Stop Hardcoding :(
-const invertCourseText = () => {
-    if(document.URL.includes('home')){
-        try{
-            if(document.getElementsByTagName('d2l-my-courses').length > 0){
-                let tiles = document.getElementsByTagName('d2l-my-courses')[0]
-                            .shadowRoot["firstElementChild"]
-                            .shadowRoot["firstElementChild"]
+const invertTabsTitles = () => {
+    if (document.URL.includes('home')) {
+        try {
+            if (document.getElementsByClassName('d2l-my-courses-widget').length) {
+                let tabs = document.getElementsByClassName('d2l-my-courses-widget')[0]
+                            .shadowRoot["children"][1]
                             .shadowRoot["children"][2]
-                            .children[1]
-                            .shadowRoot["children"][1]; 
+                            .shadowRoot["children"][0]
+                            .getElementsByTagName('d2l-tab-internal');
                 
-                for(let i = 0; i<tiles["childElementCount"]; ++i)
-                    tiles["children"][i].style.color = _invert; 
+                for(let i = 0; i<tabs["length"]; ++i) {
+                    tabs[i].shadowRoot["children"][0].style.color = _invert;
+                }
             }
         } catch (err) {
-            console.log("Failed to invert course text");
-            console.error(err); 
+            console.log("Failed to invert tab titles");
+            console.error(err);
         }
     }
 }
@@ -161,7 +161,7 @@ const darken = () => {
     setTimeout(invertNavIcons, SHADOW_TIMEOUT);
 
     //Course Text
-    setTimeout(invertCourseText, SPINNER_TIMEOUT); 
+    setTimeout(invertTabsTitles, SPINNER_TIMEOUT); 
 } 
 
 const initExtension = () => {
