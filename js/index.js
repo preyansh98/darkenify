@@ -101,6 +101,11 @@ const darkenElementsByClassName = (classesToDarken) => {
 const darken = () => {
     let classesToDarken = []; 
 
+    // Stop darken on quiz page.
+    if (window.location.href.includes('quizzing')) {
+        return;
+    }
+
     //Body
     if(document.getElementsByClassName('d2l-body').length > 0)
         document.getElementsByClassName('d2l-body')[0].style.backgroundColor = _color;
